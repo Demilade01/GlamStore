@@ -11,12 +11,12 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      if(window.scrollY > 40) {
+      if(window.scrollY > 20) {
         setIsActive(true);
       } else {
         setIsActive(false);
       }
-    })
+    }, [])
   })
 
   const toggleMenu = () => {
@@ -24,7 +24,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`${isActive ? 'bg-white shadow-sm py-3' : 'bg-transparent py-4'}fixed left-0 right-0 w-full z-10 max-padd-container flexBetween transition-all duration-300`}>
+    <header className={`${isActive ? 'bg-white shadow-sm py-3' : 'bg-transparent py-4'} fixed left-0 right-0 w-full z-10 max-padd-container flexBetween transition-all duration-300`}>
       {/* {Logo} */}
       <Link to={'/'}>
         <h4 className='bold-24'>
