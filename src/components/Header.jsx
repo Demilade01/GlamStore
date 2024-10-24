@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { GiShoppingBag } from 'react-icons/gi';
+import { SidebarContext } from '../context/SidebarContext';
+import { CartContext } from '../context/CartContext';
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [isActive, setIsActive ] = useState(false);
+
+  const {isOpen, setIsOpen} = useContext(SidebarContext);
+  const {itemQuantity} = useContext(CartContext);
+
   const navigate = useNavigate();
+
+  console.log(itemQuantity);
+
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -45,12 +54,12 @@ const Header = () => {
             <MdMenu onClick={toggleMenu} className='md:hidden  cursor-pointer hover:text-secondary text-2xl'/>
           ): (<MdClose onClick={toggleMenu} className='md:hidden cursor-pointer hover:text-secondary text-2xl'/>)}
 
-          <Link className='flex relative'>
+          <div className='flex relative' onClick={() => setIsOpen(!isOpen)}>
             <GiShoppingBag
               className='text-[25px]'
             />
-            <span className='bg-secondary text-white text-sm absolute -top-2.5 -right-2.5 flexCenter w-5 h-5 rounded-full shadow-md'>0</span>
-          </Link>
+            <span className='bg-secondary text-white text-sm absolute -top-2.5 -right-2.5 flexCenter w-5 h-5 rounded-full shadow-md'>{itemQuantity}</span>
+          </div>
 
           <button className='btn-outline rounded-full'>Login</button>
         </div>
